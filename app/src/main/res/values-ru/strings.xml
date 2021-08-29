@@ -399,4 +399,8 @@
     <string name="utls_fingerprint">Отпечаток uTLS</string>
     <string name="ss_stream_provider">Провайдер потока Shadowsocks</string>
     <string name="menu_traffic">Движение</string>
+    <string name="statistics_disabled">Статистика трафика отключена</string>
+    <string name="no_statistics">Статистики пока нет</string>
+    <string name="traffic_statistics_summary">Может увеличить потребление энергии</string>
+    <string name="traffic_statistics">Включить статистику трафика</string>
 </resources>

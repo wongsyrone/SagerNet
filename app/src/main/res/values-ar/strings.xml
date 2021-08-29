@@ -405,4 +405,8 @@
     <string name="utls_fingerprint">بصمة uTLS</string>
     <string name="ss_stream_provider">مزود تيار شادوسوكس</string>
     <string name="menu_traffic">مرور</string>
+    <string name="statistics_disabled">إحصائيات حركة المرور معطلة</string>
+    <string name="no_statistics">لا توجد إحصاءات حتى الآن</string>
+    <string name="traffic_statistics_summary">قد يزيد من استهلاك الطاقة</string>
+    <string name="traffic_statistics">تمكين إحصائيات حركة المرور</string>
 </resources>

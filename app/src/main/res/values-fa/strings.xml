@@ -397,4 +397,8 @@
     <string name="utls_fingerprint">اثر انگشت uTLS</string>
     <string name="ss_stream_provider">ارائه دهنده جریان شادوساکس</string>
     <string name="menu_traffic">ترافیک</string>
+    <string name="statistics_disabled">آمار ترافیک غیرفعال شد</string>
+    <string name="no_statistics">هنوز آماری در دسترس نیست</string>
+    <string name="traffic_statistics_summary">ممکن است مصرف برق را افزایش دهد</string>
+    <string name="traffic_statistics">فعال کردن آمار ترافیک</string>
 </resources>
