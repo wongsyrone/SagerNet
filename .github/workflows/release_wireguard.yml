@@ -1,4 +1,4 @@
-name: Hysteria Plugin Release Build
+name: WireGuard Plugin Release Build
 on:
   workflow_dispatch:
     inputs:
@@ -32,14 +32,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Fetch Status
-        run: git submodule status 'plugin/hysteria/*' > hysteria_status
-      - name: Hysteria Cache
+        run: git submodule status 'plugin/wireguard/*' > wireguard_status
+      - name: WireGuard Cache
         id: cache
         uses: actions/cache@v2
         with:
           path: |
-            plugin/hysteria/src/main/jniLibs
-          key: ${{ hashFiles('bin/lib/hysteria/*', 'hysteria_status') }}
+            plugin/wireguard/src/main/jniLibs
+          key: ${{ hashFiles('bin/lib/wireguard/*', 'wireguard_status') }}
       - name: Gradle cache
         uses: actions/cache@v2
         with:
@@ -49,10 +49,10 @@ jobs:
         uses: actions/setup-go@v2
         if: steps.cache.outputs.cache-hit != 'true'
         with:
-          go-version: 1.16
+          go-version: 1.17
       - name: Native Build
         if: steps.cache.outputs.cache-hit != 'true'
-        run: ./run plugin hysteria
+        run: ./run plugin wireguard
   build:
     name: Gradle Build
     runs-on: ubuntu-latest
@@ -63,13 +63,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Fetch Status
-        run: git submodule status 'plugin/hysteria/*' > hysteria_status
-      - name: Hysteria Cache
+        run: git submodule status 'plugin/wireguard/*' > wireguard_status
+      - name: WireGuard Cache
         uses: actions/cache@v2
         with:
           path: |
-            plugin/hysteria/src/main/jniLibs
-          key: ${{ hashFiles('bin/lib/hysteria/*', 'hysteria_status') }}
+            plugin/wireguard/src/main/jniLibs
+          key: ${{ hashFiles('bin/lib/wireguard/*', 'wireguard_status') }}
       - name: Gradle cache
         uses: actions/cache@v2
         with:
@@ -78,14 +78,14 @@ jobs:
       - name: Release Build
         env:
           SKIP_BUILD: on
-          BUILD_PLUGIN: hysteria
+          BUILD_PLUGIN: wireguard
         run: |
           echo "sdk.dir=${ANDROID_HOME}" > local.properties
           echo "ndk.dir=${ANDROID_HOME}/ndk/21.4.7075529" >> local.properties
           export LOCAL_PROPERTIES="${{ secrets.LOCAL_PROPERTIES }}"
           ./run init action library
-          ./gradlew :plugin:hysteria:assembleOssRelease
-          APK=$(find plugin/hysteria/build/outputs/apk -name '*arm64-v8a*.apk')
+          ./gradlew :plugin:wireguard:assembleOssRelease
+          APK=$(find plugin/wireguard/build/outputs/apk -name '*arm64-v8a*.apk')
           APK=$(dirname $APK)
           echo "APK=$APK" >> $GITHUB_ENV
       - uses: actions/upload-artifact@v2
@@ -171,13 +171,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Fetch Status
-        run: git submodule status 'plugin/hysteria/*' > hysteria_status
-      - name: Hysteria Cache
+        run: git submodule status 'plugin/wireguard/*' > wireguard_status
+      - name: WireGuard Cache
         uses: actions/cache@v2
         with:
           path: |
-            plugin/hysteria/src/main/jniLibs
-          key: ${{ hashFiles('bin/lib/hysteria/*', 'hysteria_status') }}
+            plugin/wireguard/src/main/jniLibs
+          key: ${{ hashFiles('bin/lib/wireguard/*', 'wireguard_status') }}
       - name: Gradle cache
         uses: actions/cache@v2
         with:
@@ -186,7 +186,7 @@ jobs:
       - name: Release Build
         env:
           SKIP_BUILD: on
-          BUILD_PLUGIN: hysteria
+          BUILD_PLUGIN: wireguard
         run: |
           echo "sdk.dir=${ANDROID_HOME}" > local.properties
           echo "ndk.dir=${ANDROID_HOME}/ndk/21.4.7075529" >> local.properties
@@ -195,4 +195,4 @@ jobs:
           ${{ secrets.ANDROID_PUBLISHER_CREDENTIALS }}"
           EOF
           ./run init action library
-          ./gradlew :plugin:hysteria:publishPlayReleaseBundle
+          ./gradlew :plugin:wireguard:publishPlayReleaseBundle
